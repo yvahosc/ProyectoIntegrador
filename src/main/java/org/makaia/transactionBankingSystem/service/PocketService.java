@@ -11,11 +11,8 @@ import org.makaia.transactionBankingSystem.repository.PocketRepository;
 import org.makaia.transactionBankingSystem.validation.PocketValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +33,7 @@ public class PocketService {
         this.pocketValidation = pocketValidation;
         this.accountService = accountService;
     }
+
     public DTOPocketConsultOut getPocketsByAccountNumber(Long accountNumber) {
         List<Pocket> pockets = this.pocketRepository.findByAccountAccountNumber(accountNumber);
 
@@ -52,16 +50,14 @@ public class PocketService {
 
         Account existingAccount = getAccountById(dtoPocketCreation.getAccountNumber());
         if(existingAccount == null){
-            List<String> error = List.of("La cuenta con numero '" + dtoPocketCreation.getAccountNumber() +
-                    "' no existe en la base de datos.");
+            List<String> error = List.of("La cuenta con numero '" + dtoPocketCreation.getAccountNumber() + "' no existe en la base de datos.");
             throw new ApiException (404, error);
-        } else{
+        }else{
             if(isThereEnoughBalance(existingAccount, dtoPocketCreation.getInitialBalance())){
-                Pocket pocket = new Pocket(dtoPocketCreation.getName(), dtoPocketCreation.getInitialBalance(),
-                        existingAccount);
+                Pocket pocket = new Pocket(dtoPocketCreation.getName(), dtoPocketCreation.getInitialBalance(), existingAccount);
                 this.pocketRepository.save(pocket);
-                return dtoPocketCreation;
-            } else{
+                return dtoPocketCreation;}
+            else{
                 List<String> error = List.of("La cuenta con numero '" + dtoPocketCreation.getAccountNumber() +
                         "' no tiene suficientes fondos disponibles para enviar al bolsillo.");
                 throw new ApiException (400, error);
@@ -70,11 +66,9 @@ public class PocketService {
     }
 
     public DTOPocketTransfer transferToPocket(DTOPocketTransfer dtoPocketTransfer) throws ApiException {
-
         pocketValidation.transferPocketValidation(dtoPocketTransfer);
         Account existingAccount = getAccountById(dtoPocketTransfer.getAccountNumber());
-        Pocket existingPocket = getPocketByIdByAccount(dtoPocketTransfer.getPocketNumber(), dtoPocketTransfer
-                .getAccountNumber());
+        Pocket existingPocket = getPocketByIdByAccount(dtoPocketTransfer.getPocketNumber(), dtoPocketTransfer.getAccountNumber());
 
         if(existingAccount == null){
             List<String> error = List.of("La cuenta con numero '" + dtoPocketTransfer.getAccountNumber() +
@@ -84,16 +78,14 @@ public class PocketService {
             List<String> error = List.of("El bolsillo con numero '" + dtoPocketTransfer.getPocketNumber() +
                     "' correspondiente a la cuenta '" + dtoPocketTransfer.getAccountNumber() + "' no existe en la base de datos.");
             throw new ApiException (404, error);
-        }
-        else{
+        } else{
             if(isThereEnoughBalance(existingAccount, dtoPocketTransfer.getAmount())){
                 existingPocket.setAmount(existingPocket.getAmount().add(dtoPocketTransfer.getAmount()));
                 this.pocketRepository.save(existingPocket);
                 dtoPocketTransfer.setAmount(existingPocket.getAmount());
-                return dtoPocketTransfer;
-            } else{
-                List<String> error = List.of("La cuenta con numero '" + dtoPocketTransfer.getAccountNumber() +
-                        "' no tiene suficientes fondos disponibles para enviar al bolsillo.");
+                return dtoPocketTransfer;}
+            else{
+                List<String> error = List.of("La cuenta con numero '" + dtoPocketTransfer.getAccountNumber() + "' no tiene suficientes fondos disponibles para enviar al bolsillo.");
                 throw new ApiException (400, error);
             }
         }
@@ -107,11 +99,10 @@ public class PocketService {
         return account.getBalance().add(balanceInPocketsOfOneAccount(account.getAccountNumber()).negate()).compareTo(amountToMoveToPocket) >= 0;
     }
 
-    public Account getAccountById (Long id) throws ApiException {
+    public Account getAccountById (Long id){
         try{
             return accountService.getAccountById(id);
-        } catch(Exception e){
-            System.out.println(e.getMessage());
+        } catch(ApiException e){
             return null;
         }
     }
