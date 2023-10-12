@@ -3,6 +3,7 @@ package org.makaia.transactionBankingSystem.validation;
 import org.junit.jupiter.api.Test;
 import org.makaia.transactionBankingSystem.dto.dtoAccount.DTOAccountCreation;
 import org.makaia.transactionBankingSystem.dto.dtoAccount.DTOAccountDeposit;
+import org.makaia.transactionBankingSystem.dto.dtoAccount.DTOAccountTransfer;
 import org.makaia.transactionBankingSystem.dto.dtoPerson.DTOPersonCreate;
 import org.makaia.transactionBankingSystem.exception.ApiException;
 import org.makaia.transactionBankingSystem.model.Person;
@@ -88,10 +89,39 @@ class AccountValidationTest {
     }
 
     @Test
-    void getAccountValidation() {
+    void getAccountValidationWithInvalidNumberAccount() {
+        Long id = 3L;
+        ApiException apiException = assertThrows(ApiException.class,
+                () -> accountValidation.getAccountValidation(id));
+        assertEquals(400, apiException.getStatusCode());
+        assertEquals(List.of("- Error al ingresar el numero de la cuenta. " +
+                        "Ingrese un valor válido: número de 15 dígitos."),
+                apiException.getErrors());
     }
 
     @Test
-    void transferAccountValidation() {
+    void getAccountValidation() throws ApiException {
+        Long id = 333908555109438L;
+        assertDoesNotThrow(() -> accountValidation.getAccountValidation(id));
+        assertTrue(accountValidation.getAccountValidation(id));
+    }
+
+    @Test
+    void transferAccountValidationWithErrors(){
+        DTOAccountTransfer dtoAccountTransfer = new DTOAccountTransfer(333908555109438L,
+                333908555109438L, BigDecimal.valueOf(1000));
+        ApiException apiException = assertThrows(ApiException.class,
+                () -> accountValidation.transferAccountValidation(dtoAccountTransfer));
+        assertEquals(400, apiException.getStatusCode());
+        assertEquals(List.of("- Error. La cantidad a transferir debe ser mayor o igual a $2000."),
+                apiException.getErrors());
+    }
+
+    @Test
+    void transferAccountValidation() throws ApiException {
+        DTOAccountTransfer dtoAccountTransfer = new DTOAccountTransfer(333908555109438L,
+                333908555109438L, BigDecimal.valueOf(2000));
+        assertDoesNotThrow(() -> accountValidation.transferAccountValidation(dtoAccountTransfer));
+        assertTrue(accountValidation.transferAccountValidation(dtoAccountTransfer));
     }
 }
