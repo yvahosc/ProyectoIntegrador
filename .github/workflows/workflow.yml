@@ -17,8 +17,8 @@ jobs:
           java-version: 11
           distribution: temurin
       - name: clean project
-          run: ./gradlew clean
+        run: ./gradlew clean
       - name: run all test
-          run: ./gradlew testClasses
+        run: ./gradlew testClasses
       - name: create .jar and install
-          run: ./gradlew bootJar
+        run: ./gradlew bootJar
