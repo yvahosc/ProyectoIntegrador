@@ -33,26 +33,25 @@
 ## Especificaciones
 
 1. Cuentas
-
-1. 1. Apertura de Cuentas
+* Apertura de Cuentas
 ### Endpoint para Abrir una Cuenta: permite a los usuarios abrir una nueva cuenta bancaria proporcionando su nombre y saldo inicial. POST -> /api/accounts
 ```json
 {
     "initialBalance": 0,
     "owner":{
         "person":{
-            "id": "1020475585",
+            "id": "1020470085",
             "firstName": "Yeisson",
             "lastName": "Vahos",
             "email": "yvahosc@gmail.com",
-            "phone": "+57-3046406015"
+            "phone": "+57-3046400015"
         },
         "password": "1234"
     }
 }
 ```
 
-1. 2. Depósitos en cuentas
+* Depósitos en cuentas
 ### Endpoint para Realizar un Depósito: permite a los usuarios realizar un depósito en una cuenta existente proporcionando el número de cuenta y la cantidad a depositar. POST -> /api/accounts/{account_number}/deposit
 ```json
 {
@@ -60,7 +59,7 @@
 }
 ```
 
-1. 3. Transferencias entre cuentas
+* Transferencias entre cuentas
 ### Endpoint para Realizar una Transferencia: permite a los usuarios transferir dinero de una cuenta a otra, proporcionando los números de cuenta de origen y destino, así como la cantidad a transferir. POST -> /api/accounts/transfer
 ```json
 {
@@ -70,13 +69,13 @@
 }
 ```
 
-1. 4. Consultar cuenta
+* Consultar cuenta
 ### Endpoint para Consultar una Cuenta: permite a los usuarios consultar los detalles y el saldo actual de una cuenta específica en el sistema de transacciones bancarias. GET -> /api/accounts/{account_number}
 
 
 2. Bolsillos
 
-2. 1. Creación de bolsillos
+* Creación de bolsillos
 ### Endpoint para Crear un Bolsillo: permite a los usuarios crear un bolsillo (subcuenta) asociado a su cuenta principal. El dinero almacenado en el bolsillo se descuenta del saldo de la cuenta principal. POST -> /api/pockets
 ```json
 {
@@ -86,7 +85,7 @@
 }
 ```
 
-2. 2. Transferencias a bolsillos
+* Transferencias a bolsillos
 ### Endpoint para Transferir Dinero al Bolsillo: permite a los usuarios transferir dinero desde la cuenta principal a un bolsillo existente, proporcionando el número de cuenta y bolsillo, así como la cantidad a transferir. POST -> /api/pockets/transfer
 ```json
 {
@@ -96,7 +95,7 @@
 }
 ```
 
-2. 3. Consulta de bolsillos
+* Consulta de bolsillos
 ### Endpoint para Obtener Bolsillos de una Cuenta: permite a los usuarios obtener una lista de los bolsillos asociados a una cuenta específica. GET -> /api/accounts/{account_number}/pockets
 
 
