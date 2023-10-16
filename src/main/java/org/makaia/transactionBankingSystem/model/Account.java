@@ -1,11 +1,16 @@
 package org.makaia.transactionBankingSystem.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
 @Table(name = "account")
+@Schema(title = "Account: Entidad para el almacenamiento de información de " +
+        "una cuenta bancaria en el sistema, contiene la información completa " +
+        "de la cuenta bancaria.")
 public class Account {
 
     @Id

@@ -23,6 +23,8 @@ dependencies {
 	implementation 'com.auth0:java-jwt:4.3.0'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.7.0'
+
 }
 
 tasks.named('test') {

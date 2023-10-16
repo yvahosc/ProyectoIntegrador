@@ -1,8 +1,12 @@
 package org.makaia.transactionBankingSystem.dto.dtoPerson;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.makaia.transactionBankingSystem.model.Person;
 
-
+@Schema(title = "DTOPersonCreate: Objeto de transferencia de datos para el" +
+        " registro de una persona en el sistema, contiene la información " +
+        "completa de la persona junto con la información de su contraseña " +
+        "para ingresar al sistema.")
 public class DTOPersonCreate {
 
     private Person person;

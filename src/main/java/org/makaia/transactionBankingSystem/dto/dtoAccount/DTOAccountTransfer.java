@@ -1,7 +1,13 @@
 package org.makaia.transactionBankingSystem.dto.dtoAccount;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.math.BigDecimal;
 
+@Schema(title = "DTOAccountTransfer: Objeto de transferencia de datos" +
+        " para la transferencia desde una cuenta bancaria a otra, contiene " +
+        "la información los números de cuenta bancaria de origen y " +
+        "destino y  la cantidad a transferir")
 public class DTOAccountTransfer {
     private Long sourceAccountNumber;
     private Long destinationAccountNumber;

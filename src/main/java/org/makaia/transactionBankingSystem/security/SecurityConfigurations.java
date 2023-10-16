@@ -29,11 +29,17 @@ public class SecurityConfigurations {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf().disable().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Le indiamos a Spring el tipo de sesion
-                .and().authorizeHttpRequests()
-                .antMatchers(HttpMethod.POST, "/api/login")
-                .permitAll()
-                .and().authorizeHttpRequests()
-                .antMatchers(HttpMethod.POST, "/api/accounts")
+                .and().authorizeRequests()
+                .antMatchers("/v3/api-docs/**",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "swagger-ui.html",
+                        "/webjars/**",
+                        "/configuration/**",
+                        "/swagger*/**",
+                        "/api/login",
+                        "/api/accounts")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

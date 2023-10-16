@@ -1,6 +1,10 @@
 package org.makaia.transactionBankingSystem.dto.dtoPerson;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(title = "DTOPersonCreate: Objeto de transferencia de datos para la" +
+        " actualización de la información de una persona en el sistema, " +
+        "contiene la información de la persona que puede actualizarse.")
 public class DTOPersonUpdate {
     private String id;
     private String phone;

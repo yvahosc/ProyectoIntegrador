@@ -1,7 +1,11 @@
 package org.makaia.transactionBankingSystem.dto.dtoLogin;
 
-import org.makaia.transactionBankingSystem.model.Person;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(title = "DTOLogin: Objeto de transferencia de datos" +
+        " para realizar el ingreso al sistema por medio de usuario y " +
+        "contraseña.")
 public class DTOLogin {
     private String userName;
     private String password;

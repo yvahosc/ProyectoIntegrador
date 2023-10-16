@@ -1,5 +1,6 @@
 package org.makaia.transactionBankingSystem.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +11,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "person")
+@Schema(title = "Person: Entidad para el almacenamiento de información de " +
+        "una persona en el sistema, contiene la información completa de la " +
+        "persona.")
 public class Person {
 
     @Id

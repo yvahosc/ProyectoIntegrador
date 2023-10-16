@@ -1,10 +1,13 @@
 package org.makaia.transactionBankingSystem.dto.dtoAccount;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.makaia.transactionBankingSystem.dto.dtoPerson.DTOPersonCreate;
-import org.makaia.transactionBankingSystem.model.Person;
 
 import java.math.BigDecimal;
 
+@Schema(title = "DTOAccountCreation: Objeto de transferencia de datos" +
+        " para la creación de una cuenta bancaria, contiene la información " +
+        "del propietario y el saldo inicial de la cuenta.")
 public class DTOAccountCreation {
     private DTOPersonCreate owner;
     private BigDecimal initialBalance;

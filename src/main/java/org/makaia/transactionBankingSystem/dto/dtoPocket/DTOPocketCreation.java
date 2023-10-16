@@ -1,7 +1,12 @@
 package org.makaia.transactionBankingSystem.dto.dtoPocket;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.math.BigDecimal;
 
+@Schema(title = "DTOPocketCreation: Objeto de transferencia de datos para la" +
+        " creación de un bolsillo, contiene la información de su nombre, la " +
+        "cuenta bancaria a la que está asociado y la cantidad a guardar en él.")
 public class DTOPocketCreation {
     private Long accountNumber;
     private String name;
