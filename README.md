@@ -17,14 +17,14 @@
 
 ### Requerimientos funcionales
 1. Cuentas
-   1.1. Apertura de Cuentas
-   1.2. Depósitos en Cuentas
-   1.3. Transferencias entre Cuentas
-   1.4. Consultar cuenta
+   * Apertura de Cuentas
+   * Depósitos en Cuentas
+   * Transferencias entre Cuentas
+   * Consultar cuenta
 2. Bolsillos
-   2.1. Creación de Bolsillos
-   2.2. Transferencias a Bolsillos
-   2.3. Consulta de Bolsillos
+   * Creación de Bolsillos
+   * Transferencias a Bolsillos
+   * Consulta de Bolsillos
 3. Implementar Autenticación en el API REST
 
 ### Requerimientos no funcionales
